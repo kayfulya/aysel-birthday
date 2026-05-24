@@ -125,7 +125,7 @@ function setupModal() {
 function runConfetti(big = false) {
   if (typeof confetti !== 'function') return;
   const end = Date.now() + (big ? 3500 : 2200);
-  const colors = ['#ff2d8e', '#d9ff3e', '#6df3ff', '#ffc44d', '#fff4ea'];
+  const colors = ['#ffc44d', '#f0b14b', '#fff4ea', '#ffd97a', '#0b0610'];
 
   (function frame() {
     confetti({ particleCount: 5, angle: 60, spread: 75, origin: { x: 0, y: 0.7 }, colors, scalar: 1.3 });

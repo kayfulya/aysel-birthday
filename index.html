@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>для Айсель · 25</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Caveat:wght@400..700&family=Manrope:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- СЦЕНА 1 -->
+  <section class="scene is-active" data-scene="beauty" style="--art:url('assets/painting1.jpg')">
+    <div class="scene__art" aria-hidden="true"></div>
+    <div class="scene__veil" aria-hidden="true"></div>
+
+    <div class="scene__content">
+      <p class="kicker">вопрос №1</p>
+      <h1 class="q">самая красивая в&nbsp;Питере?</h1>
+      <div class="buttons">
+        <button class="btn btn--yes" data-action="yes-beauty">да</button>
+        <button class="btn btn--no" data-runaway="no-beauty">нет</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- СЦЕНА 2 -->
+  <section class="scene" data-scene="dance" style="--art:url('assets/painting2.jpg')" hidden>
+    <div class="scene__art" aria-hidden="true"></div>
+    <div class="scene__veil" aria-hidden="true"></div>
+
+    <div class="scene__content">
+      <p class="kicker">вопрос №2</p>
+      <h1 class="q">ломаешь ноги в&nbsp;танце?</h1>
+      <div class="buttons">
+        <button class="btn btn--yes" data-action="yes-dance">да</button>
+        <button class="btn btn--no" data-runaway="no-dance">нет</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- СЦЕНА 3 -->
+  <section class="scene" data-scene="zoomer" style="--art:url('assets/painting3.jpg')" hidden>
+    <div class="scene__art" aria-hidden="true"></div>
+    <div class="scene__veil" aria-hidden="true"></div>
+
+    <div class="scene__content">
+      <p class="kicker">вопрос №3</p>
+      <h1 class="q">самая прогрессивная зумерка?</h1>
+      <div class="buttons">
+        <button class="btn btn--yes" data-action="yes-zoomer">да</button>
+        <button class="btn btn--no" data-runaway="no-zoomer">нет</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ФИНАЛ -->
+  <section class="scene scene--final" data-scene="final" style="--art:url('assets/painting1.jpg')" hidden>
+    <div class="scene__art" aria-hidden="true"></div>
+    <div class="scene__veil scene__veil--final" aria-hidden="true"></div>
+
+    <div class="scene__content">
+      <p class="kicker kicker--gold">айсель · 25 · юбилей</p>
+      <h1 class="q q--final">с днём рождения,<br><em>Айсель</em></h1>
+      <p class="final-letter">
+        оставайся такой чудесной.<br>
+        спасибо, что даришь свое творчество миру.<br>
+        <span class="ros">мы теперь ровесницы 🥂</span>
+      </p>
+      <button class="btn btn--gift" data-action="open-gift">открыть подарок 🎁</button>
+    </div>
+  </section>
+
+  <!-- модалка с сертификатом -->
+  <div class="modal" data-modal hidden>
+    <div class="modal__backdrop" data-modal-close></div>
+    <div class="modal__body">
+      <button class="modal__close" data-modal-close aria-label="закрыть">×</button>
+      <p class="modal__hint">сертификат на йогу с щенками 🐶</p>
+      <div class="certificate">
+        <img src="assets/certificate-1.jpg" alt="сертификат — лицо">
+        <img src="assets/certificate-2.jpg" alt="сертификат — оборот">
+      </div>
+      <a class="modal__download" href="assets/certificate.pdf" download="Сертификат-PuppyClub-Айсель.pdf">скачать PDF</a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+/* =========================================================
+   ДЛЯ АЙСЕЛЬ · 25
+   арт-галерея: одна картина = один экран
+   ========================================================= */
+
+:root {
+  --ink: #0b0610;
+  --paper: #fff4ea;
+  --fuxia: #ff2d8e;
+  --lime: #d9ff3e;
+  --cyan: #6df3ff;
+  --gold: #ffc44d;
+  --shadow-deep: 0 22px 50px rgba(0, 0, 0, .55);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  min-height: 100%;
+  overflow-x: hidden;
+  background: #050208;
+}
+
+body {
+  font-family: "Manrope", -apple-system, sans-serif;
+  color: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+/* ============ СЦЕНА ============ */
+.scene {
+  position: relative;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+  animation: sceneIn .8s ease-out backwards;
+}
+.scene[hidden] { display: none; }
+
+@keyframes sceneIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* картина — на весь экран, чётко */
+.scene__art {
+  position: absolute;
+  inset: 0;
+  background-image: var(--art);
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  animation: artZoom 22s ease-out forwards;
+}
+@keyframes artZoom {
+  from { transform: scale(1.0); }
+  to   { transform: scale(1.08); }
+}
+
+/* затемнение снизу под текст — картина наверху чёткая, текст читаем */
+.scene__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg,
+      rgba(11, 6, 16, 0)   0%,
+      rgba(11, 6, 16, 0)   35%,
+      rgba(11, 6, 16, .55) 65%,
+      rgba(11, 6, 16, .92) 100%);
+  pointer-events: none;
+}
+.scene__veil--final {
+  background:
+    radial-gradient(ellipse at 50% 60%, rgba(11, 6, 16, .35) 0%, rgba(11, 6, 16, .82) 70%),
+    linear-gradient(180deg, rgba(11, 6, 16, .55) 0%, rgba(11, 6, 16, .92) 100%);
+}
+
+/* контент — в нижней трети */
+.scene__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 920px;
+  padding: 0 6vw 8vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.scene--final .scene__content {
+  padding-bottom: 6vh;
+  gap: 26px;
+}
+
+/* ============ ТЕКСТ ============ */
+.kicker {
+  font-family: "Manrope", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--lime);
+  padding: 8px 18px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: rgba(11, 6, 16, .5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.kicker--gold { color: var(--gold); }
+
+.q {
+  font-family: "Fraunces", serif;
+  font-variation-settings: "opsz" 144, "wght" 800, "SOFT" 30, "WONK" 1;
+  font-size: clamp(40px, 7.5vw, 88px);
+  line-height: .98;
+  letter-spacing: -.02em;
+  color: var(--paper);
+  text-shadow: 0 6px 28px rgba(0, 0, 0, .75);
+  max-width: 16ch;
+}
+.q--final {
+  font-size: clamp(48px, 9vw, 110px);
+}
+.q em {
+  font-style: italic;
+  color: var(--fuxia);
+  font-variation-settings: "opsz" 144, "wght" 900, "SOFT" 50, "WONK" 1;
+  text-shadow: 0 0 32px rgba(255, 45, 142, .6), 0 6px 28px rgba(0, 0, 0, .8);
+}
+
+.final-letter {
+  font-family: "Caveat", cursive;
+  font-size: clamp(20px, 4.2vw, 28px);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--paper);
+  max-width: 26ch;
+  opacity: .95;
+}
+.ros {
+  color: var(--lime);
+  font-size: 1.1em;
+}
+
+/* ============ КНОПКИ ============ */
+.buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: "Fraunces", serif;
+  font-variation-settings: "opsz" 144, "wght" 700;
+  font-weight: 700;
+  letter-spacing: -.005em;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease;
+}
+
+.btn--yes,
+.btn--no {
+  padding: 18px 44px;
+  min-width: 130px;
+  font-size: clamp(20px, 3.4vw, 24px);
+  border-radius: 999px;
+}
+
+.btn--yes {
+  background: var(--fuxia);
+  color: #fff;
+  box-shadow:
+    0 0 0 3px rgba(255, 244, 234, .92),
+    0 0 32px rgba(255, 45, 142, .5),
+    var(--shadow-deep);
+}
+.btn--yes:hover { transform: scale(1.05) rotate(-1.5deg); }
+.btn--yes:active { transform: scale(.96); }
+
+.btn--no {
+  background: rgba(255, 244, 234, .92);
+  color: var(--ink);
+  box-shadow:
+    0 0 0 3px rgba(11, 6, 16, .3),
+    var(--shadow-deep);
+  will-change: transform;
+}
+.btn--no:hover { transform: scale(1.02); }
+
+/* убегание — через transform, не fixed-position. кнопка остаётся в потоке */
+.btn--no.is-running {
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+}
+
+/* подарок */
+.btn--gift {
+  margin-top: 10px;
+  padding: 22px 48px;
+  font-size: clamp(20px, 4vw, 26px);
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--ink);
+  box-shadow:
+    0 0 0 3px rgba(255, 244, 234, .92),
+    0 0 48px rgba(255, 196, 77, .65),
+    var(--shadow-deep);
+  animation: giftPulse 1.8s ease-in-out infinite;
+}
+@keyframes giftPulse {
+  0%, 100% { transform: scale(1) rotate(-1deg); }
+  50%      { transform: scale(1.05) rotate(1deg); }
+}
+.btn--gift:hover { animation: none; transform: scale(1.08); }
+.btn--gift:active { transform: scale(.96); }
+
+/* ============ МОДАЛКА ============ */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vh 4vw;
+  animation: modalFade .35s ease;
+}
+.modal[hidden] { display: none; }
+@keyframes modalFade { from { opacity: 0; } to { opacity: 1; } }
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 2, 8, .88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.modal__body {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 24px;
+  padding: 24px;
+  max-width: 720px;
+  width: 100%;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
+  animation: modalPop .5s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes modalPop {
+  from { transform: scale(.85) translateY(20px); opacity: 0; }
+  to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.modal__close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: var(--fuxia);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+  transition: transform .2s ease;
+}
+.modal__close:hover { transform: scale(1.1) rotate(90deg); }
+
+.modal__hint {
+  font-family: "Caveat", cursive;
+  font-size: 26px;
+  font-weight: 600;
+  color: #8a1f3d;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.certificate { display: flex; flex-direction: column; gap: 12px; }
+.certificate img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .15);
+  display: block;
+}
+
+.modal__download {
+  display: block;
+  width: fit-content;
+  margin: 18px auto 0;
+  padding: 14px 28px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 999px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  transition: transform .2s ease;
+}
+.modal__download:hover { transform: translateY(-2px); }
+
+/* ============ АДАПТИВ ============ */
+@media (max-width: 520px) {
+  .scene__content { padding: 0 5vw 6vh; gap: 18px; }
+  .buttons { gap: 12px; }
+  .btn--yes, .btn--no { padding: 16px 30px; min-width: 110px; }
+  .modal__body { padding: 16px; border-radius: 18px; }
+}
+
+@media (min-width: 760px) {
+  .scene { align-items: center; }
+  .scene__content {
+    padding: 0 6vw;
+    padding-bottom: 12vh;
+  }
+  .scene--final .scene__content { padding-bottom: 10vh; }
+}
